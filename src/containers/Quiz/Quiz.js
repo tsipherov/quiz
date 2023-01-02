@@ -32,6 +32,28 @@ class Quiz extends Component {
           { text: "1803", id: 4 },
         ],
       },
+      {
+        question: "Столица Австралии?",
+        rightAnswerId: 1,
+        id: 3,
+        answers: [
+          { text: "Сидней", id: 1 },
+          { text: "Оттава", id: 2 },
+          { text: "Абу-Даби", id: 3 },
+          { text: "Канберра", id: 4 },
+        ],
+      },
+      {
+        question: "Какая река является самой длинной на планете?",
+        rightAnswerId: 4,
+        id: 4,
+        answers: [
+          { text: "Амазонка", id: 1 },
+          { text: "Лимпопо", id: 2 },
+          { text: "Дунай", id: 3 },
+          { text: "Нил", id: 4 },
+        ],
+      },
     ],
   };
 
@@ -91,9 +113,9 @@ class Quiz extends Component {
     });
   };
 
-  componentDidMount() {
-    console.log("Quiz ID = ", this.props.match.params.id);
-  }
+  // componentDidMount() {
+  //   console.log("Quiz ID = ", this.props.match.params.id);
+  // }
 
   render() {
     return (

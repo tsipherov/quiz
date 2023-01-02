@@ -1,6 +1,6 @@
 import "./App.scss";
 import Layout from "./hoc/Layout/Layout";
-import { Route, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Quiz from "./containers/Quiz/Quiz";
 import QuizList from "./containers/QuizList/QuizList";
 import Auth from "./containers/Auth/Auth";
@@ -8,14 +8,18 @@ import QuizCreator from "./containers/QuizCreator/QuizCreator";
 
 function App() {
   return (
-    <Layout>
-      <Switch>
-        <Route path="/auth" component={Auth} />
-        <Route path="/quiz-creator" component={QuizCreator} />
-        <Route path="/quiz/:id" component={Quiz} />
-        <Route path="/" component={QuizList} />
-      </Switch>
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<QuizList />} />
+          <Route path="/quiz/:int" element={<Quiz />} />
+          <Route path="/quiz-creator" element={<QuizCreator />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/quiz/:id" element={<Quiz />} />
+          <Route path="/*" element={<h1>Page Not Found (404)</h1>} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 

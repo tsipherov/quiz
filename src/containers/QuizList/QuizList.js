@@ -1,26 +1,28 @@
 import React, { Component } from "react";
 import classes from "./QuizList.module.scss";
-import { NavLink } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
+// import axios from "axios";
 
 export default class QuizList extends Component {
   renderQuizes() {
-    return [1, 2, 3].map((quiz, index) => {
+    return ["География", "Литература", "История", "Кино"].map((quiz, index) => {
       return (
         <li key={index}>
-          <NavLink to={"/quiz/" + quiz}>Тест {quiz}</NavLink>
+          <Link to={`/quiz/${index + 1}`}>
+            Тест из раздела {quiz.toUpperCase()}
+          </Link>
         </li>
       );
     });
   }
 
-  componentDidMount() {
-    axios
-      .get("https://react-quiz-b9c12-default-rtdb.firebaseio.com/quiz.json")
-      .then((response) => {
-        console.log(response);
-      });
-  }
+  // componentDidMount() {
+  //   axios
+  //     .get("https://react-quiz-b9c12-default-rtdb.firebaseio.com/quiz.json")
+  //     .then((response) => {
+  //       console.log(response);
+  //     });
+  // }
 
   render() {
     return (
