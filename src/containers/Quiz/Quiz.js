@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./Quiz.module.scss";
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
+import axios from "axios";
 
 class Quiz extends Component {
   state = {
@@ -34,7 +35,7 @@ class Quiz extends Component {
       },
       {
         question: "Столица Австралии?",
-        rightAnswerId: 1,
+        rightAnswerId: 4,
         id: 3,
         answers: [
           { text: "Сидней", id: 1 },
@@ -113,9 +114,21 @@ class Quiz extends Component {
     });
   };
 
-  // componentDidMount() {
-  //   console.log("Quiz ID = ", this.props.match.params.id);
-  // }
+  componentDidMount() {
+    axios
+      .get(
+        "https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes.json"
+      )
+      .then((response) => {
+        console.log(response.data);
+        const quizList = [];
+        Object.keys(response.data).forEach((key) =>
+          quizList.push(response.data[key][0])
+        );
+        this.setState((prevState) => ({ ...prevState, quiz: quizList }));
+      })
+      .catch((err) => console.log("err >>> ", err));
+  }
 
   render() {
     return (

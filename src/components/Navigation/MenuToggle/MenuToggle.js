@@ -13,7 +13,7 @@ const MenuToggle = (props) => {
 
   return (
     <i className={cls.join(" ")} onClick={props.onToggle}>
-      {props.isOpen ? "x" : "#"} {/*заменяю иконки когда нет инета*/}
+      {/* {props.isOpen ? "x" : "#"} заменяю иконки когда нет инета */}
     </i>
   );
 };

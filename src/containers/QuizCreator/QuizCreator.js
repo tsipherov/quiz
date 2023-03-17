@@ -9,6 +9,7 @@ import {
 } from "../../form/formFramework";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 import Select from "../../components/UI/Select/Select";
+import axios from "axios";
 
 function createOptionControl(number) {
   return createControl(
@@ -37,13 +38,15 @@ function createFormControls() {
   };
 }
 
+const initState = {
+  quiz: [],
+  isFormValid: false,
+  rightAnswerId: 1,
+  formControls: createFormControls(),
+};
+
 export default class QuizCreator extends Component {
-  state = {
-    quiz: [],
-    isFormValid: false,
-    rightAnswerId: 1,
-    formControls: createFormControls(),
-  };
+  state = initState;
 
   submitHandler = (event) => {
     event.preventDefault();
@@ -55,13 +58,8 @@ export default class QuizCreator extends Component {
     const quiz = this.state.quiz.concat();
     const index = quiz.length + 1;
 
-    const {
-      question,
-      option1,
-      option2,
-      option3,
-      option4,
-    } = this.state.formControls;
+    const { question, option1, option2, option3, option4 } =
+      this.state.formControls;
 
     const questionItem = {
       question: question.value,
@@ -90,6 +88,15 @@ export default class QuizCreator extends Component {
 
     console.log(this.state.quiz);
     // TODO: Server
+    axios
+      .post(
+        "https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes.json",
+        this.state.quiz
+      )
+      .then((res) => {
+        if (res.statusText === "OK") this.setState(initState);
+      })
+      .catch((err) => console.log("err >>> ", err));
   };
 
   changeHandler = (value, controlName) => {
