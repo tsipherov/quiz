@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classes from "./QuizList.module.scss";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 export default class QuizList extends Component {
   renderQuizes() {
