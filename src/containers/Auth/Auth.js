@@ -3,10 +3,11 @@ import classes from "./Auth.module.scss";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import is from "is_js";
-import axios from "axios";
-import { API_KEY, API_LOGIN_URL, API_REGISTER_URL } from "../../config";
+// import axios from "axios";
+import { connect } from "react-redux";
+import { fetchAuthData } from "../../store/actions/authActions";
 
-export default class Auth extends Component {
+class Auth extends Component {
   state = {
     isFormValid: false,
     formControls: {
@@ -38,25 +39,24 @@ export default class Auth extends Component {
   };
 
   loginHandler = () => {
-    axios
-      .post(`${API_LOGIN_URL}?key=${API_KEY}`, {
-        email: this.state.formControls.email.value,
-        password: this.state.formControls.password.value,
-        returnSecureToken: true,
-      })
-      .then((res) => console.log("res >>> ", res.data))
-      .catch((err) => console.log("err >>> ", err));
+    this.props.fetchAuthData(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      true
+    );
+    // .then((res) => console.log("res >>> ", res.data))
+    // .catch((err) => console.log("err >>> ", err));
   };
 
   registerHandler = () => {
-    axios
-      .post(`${API_REGISTER_URL}?key=${API_KEY}`, {
-        email: this.state.formControls.email.value,
-        password: this.state.formControls.password.value,
-        returnSecureToken: true,
-      })
-      .then((res) => console.log("res >>> ", res.data))
-      .catch((err) => console.log("err >>> ", err));
+    this.props.fetchAuthData(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      false
+    );
+
+    // .then((res) => console.log("res >>> ", res.data))
+    // .catch((err) => console.log("err >>> ", err));
   };
 
   submitHandler = (event) => {
@@ -125,7 +125,6 @@ export default class Auth extends Component {
       );
     });
   }
-
   render() {
     return (
       <div className={classes.Auth}>
@@ -156,3 +155,14 @@ export default class Auth extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: !!state.auth.token,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchAuthData: (email, password, isLogin) =>
+    dispatch(fetchAuthData(email, password, isLogin)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

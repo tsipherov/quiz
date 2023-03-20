@@ -14,3 +14,11 @@ export const ADD_NEW_QUESTION_TO_QUIZ = "ADD_NEW_QUESTION_TO_QUIZ";
 export const FETCH_NEW_QUIZ_START = "FETCH_NEW_QUIZ_START";
 export const FETCH_NEW_QUIZ_SUCCESS = "FETCH_NEW_QUIZ_SUCCESS";
 export const FETCH_NEW_QUIZ_ERROR = "FETCH_NEW_QUIZ_ERROR";
+
+// _______________________
+// ##Authorization Actions
+// -----------------------
+
+// export const FETCH_AUTH_START = "FETCH_AUTH_START";
+export const FETCH_AUTH_SUCCESS = "FETCH_AUTH_SUCCESS";
+export const AUTH_LOGOUT = "AUTH_LOGOUT";
