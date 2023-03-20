@@ -5,3 +5,12 @@ export const SET_QUIZ_RESULTS = "SET_QUIZ_RESULTS";
 export const SET_QUIZ_FINISHED = "SET_QUIZ_FINISHED";
 export const SET_QUIZ_NEXT = "SET_QUIZ_NEXT";
 export const RETRY_QUIZ = "RETRY_QUIZ";
+
+// _____________________
+// ##Create Quiz Actions
+// ---------------------
+
+export const ADD_NEW_QUESTION_TO_QUIZ = "ADD_NEW_QUESTION_TO_QUIZ";
+export const FETCH_NEW_QUIZ_START = "FETCH_NEW_QUIZ_START";
+export const FETCH_NEW_QUIZ_SUCCESS = "FETCH_NEW_QUIZ_SUCCESS";
+export const FETCH_NEW_QUIZ_ERROR = "FETCH_NEW_QUIZ_ERROR";
