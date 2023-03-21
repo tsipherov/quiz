@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import Layout from "./hoc/Layout/Layout";
 import Quiz from "./containers/Quiz/Quiz";
@@ -18,10 +18,8 @@ class App extends Component {
     let routes = (
       <Routes>
         <Route path="/" element={<QuizList />} />
-        {/* <Route path="/quiz/:int" element={<Quiz />} /> */}
-        {/* <Route path="/quiz-creator" element={<QuizCreator />} /> */}
-        <Route path="/auth" element={<Auth />} />
         <Route path="/quiz/:id" element={<Quiz />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="/*" element={<h1>Page Not Found (404)</h1>} />
       </Routes>
     );
@@ -30,10 +28,10 @@ class App extends Component {
       routes = (
         <Routes>
           <Route path="/" element={<QuizList />} />
-          {/* <Route path="/quiz/:int" element={<Quiz />} /> */}
           <Route path="/quiz-creator" element={<QuizCreator />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/quiz/:id" element={<Quiz />} />
+          <Route path="/auth" element={<Navigate to="/" replace />} />
           <Route path="/*" element={<h1>Page Not Found (404)</h1>} />
         </Routes>
       );

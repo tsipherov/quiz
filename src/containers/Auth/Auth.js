@@ -3,7 +3,6 @@ import classes from "./Auth.module.scss";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import is from "is_js";
-// import axios from "axios";
 import { connect } from "react-redux";
 import { fetchAuthData } from "../../store/actions/authActions";
 
@@ -44,8 +43,6 @@ class Auth extends Component {
       this.state.formControls.password.value,
       true
     );
-    // .then((res) => console.log("res >>> ", res.data))
-    // .catch((err) => console.log("err >>> ", err));
   };
 
   registerHandler = () => {
@@ -54,9 +51,6 @@ class Auth extends Component {
       this.state.formControls.password.value,
       false
     );
-
-    // .then((res) => console.log("res >>> ", res.data))
-    // .catch((err) => console.log("err >>> ", err));
   };
 
   submitHandler = (event) => {
@@ -156,13 +150,9 @@ class Auth extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.token,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   fetchAuthData: (email, password, isLogin) =>
     dispatch(fetchAuthData(email, password, isLogin)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(null, mapDispatchToProps)(Auth);
