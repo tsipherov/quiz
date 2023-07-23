@@ -37,6 +37,7 @@ class Quiz extends Component {
   ];
 
   componentDidMount() {
+    console.log("this.props >>> ", this.props.match);
     this.props.fetchQuizes();
   }
 

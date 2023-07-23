@@ -16,7 +16,7 @@ export const fetchNewQuiz = () => {
     dispatch(fetchNewQuizStart);
     return axios
       .post(
-        "https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes.json",
+        "https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes/history.json",
         getState().create.quiz
       )
       .then((res) => {
