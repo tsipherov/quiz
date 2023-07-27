@@ -115,7 +115,6 @@ class QuizCreator extends Component {
   };
 
   renderControls() {
-    // console.log("this.props >>> ", this.props);
     return Object.keys(this.state.formControls).map((controlName, index) => {
       const control = this.state.formControls[controlName];
 
