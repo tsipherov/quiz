@@ -18,7 +18,7 @@ class App extends Component {
     let routes = (
       <Routes>
         <Route path="/" element={<QuizList />} />
-        <Route path="/quiz/:id" element={<Quiz />} />
+        <Route path="/quiz/:section" element={<Quiz />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/*" element={<h1>Page Not Found (404)</h1>} />
       </Routes>
@@ -30,7 +30,7 @@ class App extends Component {
           <Route path="/" element={<QuizList />} />
           <Route path="/quiz-creator" element={<QuizCreator />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/quiz/:id" element={<Quiz />} />
+          <Route path="/quiz/:section" element={<Quiz />} />
           <Route path="/auth" element={<Navigate to="/" replace />} />
           <Route path="/*" element={<h1>Page Not Found (404)</h1>} />
         </Routes>

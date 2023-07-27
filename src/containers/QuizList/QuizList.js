@@ -3,11 +3,20 @@ import classes from "./QuizList.module.scss";
 import { Link } from "react-router-dom";
 
 export default class QuizList extends Component {
+  sections = {
+    cinema: "Кино",
+    geography: "География",
+    history: "История",
+    literature: "Литература",
+  };
   renderQuizes() {
-    return ["География", "Литература", "История", "Кино"].map((quiz) => {
+    console.log("this.sections", this.sections);
+    return Object.keys(this.sections).map((quiz) => {
       return (
         <li key={quiz}>
-          <Link to={`/quiz/${quiz}`}>Тест из раздела {quiz.toUpperCase()}</Link>
+          <Link to={`/quiz/${quiz}`}>
+            Тест из раздела {this.sections[quiz].toUpperCase()}
+          </Link>
         </li>
       );
     });

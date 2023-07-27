@@ -45,12 +45,12 @@ export const onAnswerClickHandler = (answerId) => {
   };
 };
 
-export const fetchQuizes = () => {
+export const fetchQuizes = (section, token) => {
   return (dispatch) => {
     dispatch(fetchQuizesStart());
     axios
       .get(
-        "https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes.json"
+        `https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes/${section}.json?auth=${token}`
       )
       .then((response) => {
         console.log(response.data);

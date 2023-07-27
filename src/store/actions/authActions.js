@@ -14,9 +14,9 @@ export const fetchAuthData = (email, password, isLogin) => {
       new Date().getTime() + response.data.expiresIn * 1000
     );
 
-    localStorage.setItem("idToken", response.data.idToken);
-    localStorage.setItem("userId", response.data.localId);
-    localStorage.setItem("expirationDate", expirationDate);
+    localStorage.setItem("quiz_idToken", response.data.idToken);
+    localStorage.setItem("quiz_userId", response.data.localId);
+    localStorage.setItem("quiz_expirationDate", expirationDate);
 
     dispatch(fetchAuthSuccess(response.data.idToken));
     dispatch(autoLogout(response.data.expiresIn));
@@ -25,11 +25,13 @@ export const fetchAuthData = (email, password, isLogin) => {
 };
 
 export const autoLogin = () => (dispatch) => {
-  const token = localStorage.getItem("idToken");
+  const token = localStorage.getItem("quiz_idToken");
   if (!token) {
     dispatch(logout());
   } else {
-    const expirationDate = new Date(localStorage.getItem("expirationDate"));
+    const expirationDate = new Date(
+      localStorage.getItem("quiz_expirationDate")
+    );
     if (expirationDate <= new Date()) {
       dispatch(logout());
     } else {
@@ -50,9 +52,9 @@ export const autoLogout = (time) => {
 };
 
 export const logout = () => {
-  localStorage.removeItem("idToken");
-  localStorage.removeItem("userId");
-  localStorage.removeItem("expirationDate");
+  localStorage.removeItem("quiz_idToken");
+  localStorage.removeItem("quiz_userId");
+  localStorage.removeItem("quiz_expirationDate");
   return { type: AUTH_LOGOUT };
 };
 

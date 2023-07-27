@@ -11,12 +11,12 @@ export const addNewQuestionToQuiz = (newItem) => ({
   payload: newItem,
 });
 
-export const fetchNewQuiz = () => {
+export const fetchNewQuiz = (section, token) => {
   return (dispatch, getState) => {
     dispatch(fetchNewQuizStart);
     return axios
       .post(
-        "https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes/history.json",
+        `https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes/${section}.json?auth=${token}`,
         getState().create.quiz
       )
       .then((res) => {

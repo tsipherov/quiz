@@ -41,11 +41,18 @@ function createFormControls() {
     option4: createOptionControl(4),
   };
 }
+const sections = [
+  { value: "cinema", text: "Кино" },
+  { value: "geography", text: "География" },
+  { value: "history", text: "История" },
+  { value: "literature", text: "Литература" },
+];
 
 const initState = {
   isFormValid: false,
   rightAnswerId: 1,
   formControls: createFormControls(),
+  section: "cinema",
 };
 
 class QuizCreator extends Component {
@@ -84,11 +91,11 @@ class QuizCreator extends Component {
 
   createQuizHandler = (event) => {
     event.preventDefault();
-
-    this.props.fetchNewQuiz().then((result) => {
-      console.log("result >>> ", result);
-      if (result.statusText === "OK") this.setState(initState);
-    });
+    this.props
+      .fetchNewQuiz(this.state.section, this.props.token)
+      .then((result) => {
+        if (result.statusText === "OK") this.setState(initState);
+      });
   };
 
   changeHandler = (value, controlName) => {
@@ -108,6 +115,7 @@ class QuizCreator extends Component {
   };
 
   renderControls() {
+    // console.log("this.props >>> ", this.props);
     return Object.keys(this.state.formControls).map((controlName, index) => {
       const control = this.state.formControls[controlName];
 
@@ -130,18 +138,33 @@ class QuizCreator extends Component {
     });
   }
 
-  selectChangeHandler = (event) => {
+  rightAnswerChangeHandler = (event) => {
     this.setState({
       rightAnswerId: +event.target.value,
     });
   };
 
+  sectionChangeHandler = (event) => {
+    this.setState({
+      section: event.target.value,
+    });
+  };
+
   render() {
-    const select = (
+    const selectSection = (
+      <Select
+        label="Выберите раздел"
+        value={this.state.section}
+        onChange={this.sectionChangeHandler}
+        options={sections}
+      />
+    );
+
+    const selectRightAnswer = (
       <Select
         label="Выберите правильный ответ"
         value={this.state.rightAnswerId}
-        onChange={this.selectChangeHandler}
+        onChange={this.rightAnswerChangeHandler}
         options={[
           { text: 1, value: 1 },
           { text: 2, value: 2 },
@@ -157,9 +180,11 @@ class QuizCreator extends Component {
           <h1>Создание теста</h1>
 
           <form onSubmit={this.submitHandler}>
+            {selectSection}
+
             {this.renderControls()}
 
-            {select}
+            {selectRightAnswer}
 
             <Button
               type="primary"
@@ -182,14 +207,16 @@ class QuizCreator extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => ({
   quiz: state.create.quiz,
   loading: state.create.loading,
+  token: state.auth.token,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addNewQuestionToQuiz: (item) => dispatch(addNewQuestionToQuiz(item)),
-  fetchNewQuiz: () => dispatch(fetchNewQuiz()),
+  fetchNewQuiz: (section, token) => dispatch(fetchNewQuiz(section, token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuizCreator);
