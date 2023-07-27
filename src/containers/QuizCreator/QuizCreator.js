@@ -14,6 +14,7 @@ import {
   addNewQuestionToQuiz,
   fetchNewQuiz,
 } from "../../store/actions/createQuizActions";
+import uniqid from "uniqid";
 
 function createOptionControl(number) {
   return createControl(
@@ -70,7 +71,7 @@ class QuizCreator extends Component {
 
     const questionItem = {
       question: question.value,
-      id: this.props.quiz.length + 1,
+      id: uniqid(),
       rightAnswerId: this.state.rightAnswerId,
       answers: [
         { text: option1.value, id: option1.id },

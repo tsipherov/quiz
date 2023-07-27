@@ -12,32 +12,9 @@ import {
 import { useParams } from "react-router";
 
 const Quiz = (props) => {
-  const temp = [
-    {
-      question: "Столица Австралии?",
-      rightAnswerId: 4,
-      id: 3,
-      answers: [
-        { text: "Сидней", id: 1 },
-        { text: "Оттава", id: 2 },
-        { text: "Абу-Даби", id: 3 },
-        { text: "Канберра", id: 4 },
-      ],
-    },
-    {
-      question: "Какая река является самой длинной на планете?",
-      rightAnswerId: 4,
-      id: 4,
-      answers: [
-        { text: "Амазонка", id: 1 },
-        { text: "Лимпопо", id: 2 },
-        { text: "Дунай", id: 3 },
-        { text: "Нил", id: 4 },
-      ],
-    },
-  ];
   const { section } = useParams();
   useEffect(() => {
+    console.log("props >>>> ", props);
     props.fetchQuizes(section, props.token);
     return props.retryHandler();
   }, []);

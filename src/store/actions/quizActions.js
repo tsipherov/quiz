@@ -10,6 +10,16 @@ import {
 
 import axios from "axios";
 
+const _transformQuestionData = (data) => {
+  console.log("data >>> ", data);
+  const result = Object.keys(data).reduce((acc, key) => {
+    acc.push(...data[key]);
+    return acc;
+  }, []);
+  console.log("result >>>> ", result);
+  return result;
+};
+
 export const onAnswerClickHandler = (answerId) => {
   return (dispatch, getState) => {
     const state = getState().quiz;
@@ -53,12 +63,13 @@ export const fetchQuizes = (section, token) => {
         `https://quiz-d72f8-default-rtdb.europe-west1.firebasedatabase.app/quizes/${section}.json?auth=${token}`
       )
       .then((response) => {
-        console.log(response.data);
-        const quizList = [];
-        Object.keys(response.data).forEach((key) =>
-          quizList.push(response.data[key][0])
-        );
-        dispatch(fetchQuizesSuccess(quizList));
+        // console.log(response.data);
+        // const quizList = [];
+        // Object.keys(response.data).forEach((key) =>
+        //   quizList.push(response.data[key][0])
+        // );
+
+        dispatch(fetchQuizesSuccess(_transformQuestionData(response.data)));
       })
       .catch((err) => {
         dispatch(fetchQuizesError(err));
