@@ -17,6 +17,7 @@ const Quiz = (props) => {
     console.log("props >>>> ", props);
     props.fetchQuizes(section, props.token);
     return props.retryHandler();
+    // eslint-disable-next-line
   }, []);
 
   return (
