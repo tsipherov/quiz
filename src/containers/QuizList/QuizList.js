@@ -10,7 +10,6 @@ export default class QuizList extends Component {
     literature: "Литература",
   };
   renderQuizes() {
-    console.log("this.sections", this.sections);
     return Object.keys(this.sections).map((quiz) => {
       return (
         <li key={quiz}>
